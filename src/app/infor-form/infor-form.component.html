@@ -1,0 +1,158 @@
+<div class="infor-form">
+  <div class="wrapper">
+    <!-- {{ model | json }} -->
+    <form (ngSubmit)="onSubmit()" #inforForm="ngForm">
+      <div class="grid">
+        <div class="form-field">
+          <label for="name">Name*</label>
+          <input
+            type="text"
+            class="field"
+            id="name"
+            name="name"
+            required
+            #name="ngModel"
+            [(ngModel)]="model.name"
+            [hidden]="submitted"
+          />
+          <div [hidden]="name.valid || name.pristine" class="field-error">
+            Name is required.
+          </div>
+          <div class="field-value" [hidden]="!submitted">
+            {{ model.name }}
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="email">Email*</label>
+          <input
+            type="text"
+            class="field"
+            [ngClass]="isInvalidEmail ? '' : 'error'"
+            id="email"
+            name="email"
+            required
+            #email="ngModel"
+            [(ngModel)]="model.email"
+            (ngModelChange)="onEmailChange($event)"
+            [hidden]="submitted"
+          />
+          <div [hidden]="email.valid || email.pristine" class="field-error">
+            Email is required.
+          </div>
+          <div
+            [hidden]="isInvalidEmail || !email.dirty || !model.email"
+            class="field-error"
+          >
+            E-mail Address is invalid.
+          </div>
+          <div class="field-value" [hidden]="!submitted">
+            {{ model.email }}
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="contactNumber">Contact Number*</label>
+          <input
+            type="text"
+            class="field"
+            [ngClass]="isInvalidContact ? '' : 'error'"
+            id="contactNumber"
+            name="contactNumber"
+            required
+            #contactNumber="ngModel"
+            [(ngModel)]="model.contactNumber"
+            (ngModelChange)="onContactChange($event)"
+            [hidden]="submitted"
+          />
+          <div
+            [hidden]="contactNumber.valid || contactNumber.pristine"
+            class="field-error"
+          >
+            Contact Number is required.
+          </div>
+          <div
+            [hidden]="
+              isInvalidContact || !contactNumber.dirty || !model.contactNumber
+            "
+            class="field-error"
+          >
+            Contact Number should consist of 8 to 12 digits only.
+          </div>
+          <div class="field-value" [hidden]="!submitted">
+            {{ model.contactNumber }}
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="gender">Gender*</label>
+          <select
+            class="field"
+            [ngClass]="isInvalidGender ? 'error' : ''"
+            id="gender"
+            required
+            name="gender"
+            #gender="ngModel"
+            [(ngModel)]="model.gender"
+            (ngModelChange)="onGendersChange($event)"
+            [hidden]="submitted"
+          >
+            <option *ngFor="let gender of genders" [value]="gender">
+              {{ gender }}
+            </option>
+          </select>
+          <div [hidden]="!isInvalidGender" class="field-error">
+            Gender is required
+          </div>
+          <div class="field-value" [hidden]="!submitted">
+            {{ model.gender }}
+          </div>
+        </div>
+
+        <div class="form-field full">
+          <label for="notes">Notes*</label>
+          <textarea
+            class="field"
+            id="notes"
+            name="notes"
+            required
+            #notes="ngModel"
+            [(ngModel)]="model.notes"
+            [hidden]="submitted"
+          >
+          </textarea>
+          <div [hidden]="notes.valid || notes.pristine" class="field-error">
+            Notes is required.
+          </div>
+          <div class="field-value" [hidden]="!submitted">
+            {{ model.notes }}
+          </div>
+        </div>
+
+        <div class="form-field full button">
+          <button
+            type="submit"
+            class="btn-save"
+            [disabled]="
+              !inforForm.form.valid ||
+              isInvalidGender ||
+              !isInvalidContact ||
+              !isInvalidEmail
+            "
+            [hidden]="submitted"
+          >
+            Save
+          </button>
+          <button
+            type="button"
+            class="btn-edit"
+            (click)="onEdit()"
+            [hidden]="!submitted"
+          >
+            Edit
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
