@@ -15,10 +15,10 @@
             [(ngModel)]="model.name"
             [hidden]="submitted"
           />
-          <div [hidden]="name.valid || name.pristine" class="field-error">
+          <div *ngIf="name.errors?.['required']" class="field-error">
             Name is required.
           </div>
-          <div class="field-value" [hidden]="!submitted">
+          <div class="field-value" *ngIf="submitted">
             {{ model.name }}
           </div>
         </div>
@@ -28,25 +28,23 @@
           <input
             type="text"
             class="field"
-            [ngClass]="isInvalidEmail ? '' : 'error'"
             id="email"
             name="email"
             required
             #email="ngModel"
+            [pattern]="emailRegex"
             [(ngModel)]="model.email"
-            (ngModelChange)="onEmailChange($event)"
             [hidden]="submitted"
           />
-          <div [hidden]="email.valid || email.pristine" class="field-error">
-            Email is required.
+          <div *ngIf="email.invalid && (email.dirty || email.touched)">
+            <div *ngIf="email.errors?.['required']" class="field-error">
+              Email is required.
+            </div>
+            <div *ngIf="email.errors?.['pattern']" class="field-error">
+              E-mail Address is invalid.
+            </div>
           </div>
-          <div
-            [hidden]="isInvalidEmail || !email.dirty || !model.email"
-            class="field-error"
-          >
-            E-mail Address is invalid.
-          </div>
-          <div class="field-value" [hidden]="!submitted">
+          <div class="field-value" *ngIf="submitted">
             {{ model.email }}
           </div>
         </div>
@@ -56,30 +54,28 @@
           <input
             type="text"
             class="field"
-            [ngClass]="isInvalidContact ? '' : 'error'"
             id="contactNumber"
             name="contactNumber"
             required
             #contactNumber="ngModel"
+            [pattern]="contactRegex"
             [(ngModel)]="model.contactNumber"
-            (ngModelChange)="onContactChange($event)"
             [hidden]="submitted"
           />
           <div
-            [hidden]="contactNumber.valid || contactNumber.pristine"
-            class="field-error"
-          >
-            Contact Number is required.
-          </div>
-          <div
-            [hidden]="
-              isInvalidContact || !contactNumber.dirty || !model.contactNumber
+            *ngIf="
+              contactNumber.invalid &&
+              (contactNumber.dirty || contactNumber.touched)
             "
-            class="field-error"
           >
-            Contact Number should consist of 8 to 12 digits only.
+            <div *ngIf="contactNumber.errors?.['required']" class="field-error">
+              Contact number is required.
+            </div>
+            <div *ngIf="contactNumber.errors?.['pattern']" class="field-error">
+              Contact Number should consist of 8 to 12 digits only.
+            </div>
           </div>
-          <div class="field-value" [hidden]="!submitted">
+          <div class="field-value" *ngIf="submitted">
             {{ model.contactNumber }}
           </div>
         </div>
@@ -88,23 +84,19 @@
           <label for="gender">Gender*</label>
           <select
             class="field"
-            [ngClass]="isInvalidGender ? 'error' : ''"
             id="gender"
             required
             name="gender"
             #gender="ngModel"
             [(ngModel)]="model.gender"
-            (ngModelChange)="onGendersChange($event)"
             [hidden]="submitted"
           >
+            <option selected disabled>-Select-</option>
             <option *ngFor="let gender of genders" [value]="gender">
               {{ gender }}
             </option>
           </select>
-          <div [hidden]="!isInvalidGender" class="field-error">
-            Gender is required
-          </div>
-          <div class="field-value" [hidden]="!submitted">
+          <div class="field-value" *ngIf="submitted">
             {{ model.gender }}
           </div>
         </div>
@@ -121,10 +113,10 @@
             [hidden]="submitted"
           >
           </textarea>
-          <div [hidden]="notes.valid || notes.pristine" class="field-error">
+          <div *ngIf="notes.errors?.['required']" class="field-error">
             Notes is required.
           </div>
-          <div class="field-value" [hidden]="!submitted">
+          <div class="field-value" *ngIf="submitted">
             {{ model.notes }}
           </div>
         </div>
@@ -133,13 +125,8 @@
           <button
             type="submit"
             class="btn-save"
-            [disabled]="
-              !inforForm.form.valid ||
-              isInvalidGender ||
-              !isInvalidContact ||
-              !isInvalidEmail
-            "
-            [hidden]="submitted"
+            [disabled]="!inforForm.form.valid"
+            *ngIf="!submitted"
           >
             Save
           </button>
@@ -147,7 +134,7 @@
             type="button"
             class="btn-edit"
             (click)="onEdit()"
-            [hidden]="!submitted"
+            *ngIf="submitted"
           >
             Edit
           </button>
