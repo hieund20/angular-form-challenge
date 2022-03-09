@@ -1,0 +1,110 @@
+.mat-dialog-content {
+    // border: 1px solid blue;
+    max-height: 300px;
+    overflow-y: auto;
+    & .grid {
+        // border: 1px solid blue;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+        & > .form-field {
+            width: 48%;
+            margin-bottom: 25px;
+
+            & > label {
+                display: block;
+                margin-bottom: 10px;
+                font-size: 14px;
+            }
+
+            & > .field {
+                max-width: 100%;
+                min-width: 100%;
+                box-sizing: border-box;
+
+                padding: 15px 20px;
+                border: 1px solid #d8dbe0;
+                border-radius: 5px;
+
+                &.ng-touched.ng-invalid {
+                    border: 1px solid #c00;
+                }
+
+                &.error {
+                    border: 1px solid #c00;
+                }
+            }
+
+            & .field-error {
+                margin-top: 5px;
+                color: #c00;
+                font-size: 14px;
+            }
+
+            &.full {
+                width: 100%;
+            }
+
+            & .warehouse-author-list {
+                & > .warehouse-author-list-title {
+                    color: #373737;
+                    font-weight: 500;
+                    margin-top: 16px;
+                    margin-bottom: 8px;
+                }
+
+                & > .warehouse-author-list-table {
+                    border: 1px solid #ebf0ff;
+                    width: 100%;
+                    border-radius: 5px;
+                    border-collapse: separate;
+                    border-spacing: 0;
+
+                    & > thead {
+                        height: 40px;
+                        background-color: #eff3f7;
+                        font-size: 12px;
+                        color: #626262;
+                        text-align: left;
+
+                        & > tr > th {
+                            &:nth-child(1) {
+                                text-align: center;
+                            }
+                        }
+                    }
+
+                    & > tbody {
+                        & > tr > td {
+                            padding: 0.375rem 0.5rem;
+
+                            &:nth-child(1) {
+                                width: 10%;
+                            }
+                            &:nth-child(2) {
+                                width: 35%;
+                            }
+                            &:nth-child(3) {
+                                width: 35%;
+                            }
+                            &:nth-child(4) {
+                                width: 20%;
+                            }
+
+                            & > input {
+                                max-width: 100%;
+                                min-width: 100%;
+                                box-sizing: border-box;
+
+                                padding: 10px 15px;
+                                border: 1px solid #d8dbe0;
+                                border-radius: 5px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

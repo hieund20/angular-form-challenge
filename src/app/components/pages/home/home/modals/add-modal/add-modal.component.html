@@ -1,0 +1,97 @@
+<h1 mat-dialog-title>Thêm mới</h1>
+<div mat-dialog-content>
+  <form #addForm="ngForm">
+    <div class="grid">
+      <div class="form-field">
+        <label for="code">Mã kho</label>
+        <input
+          type="text"
+          class="field"
+          id="code"
+          name="code"
+          #code="ngModel"
+          [(ngModel)]="model.code"
+          required
+        />
+        <div *ngIf="code.invalid && (code.dirty || code.touched)">
+          <div *ngIf="code.errors?.['required']" class="field-error">
+            Mã kho bắt buộc nhập
+          </div>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label for="name">Tên kho</label>
+        <input
+          type="text"
+          class="field"
+          id="name"
+          name="name"
+          #name="ngModel"
+          [(ngModel)]="model.name"
+          required
+        />
+        <div *ngIf="name.invalid && (name.dirty || name.touched)">
+          <div *ngIf="name.errors?.['required']" class="field-error">
+            Tên kho bắt buộc nhập
+          </div>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label for="address">Địa chỉ</label>
+        <input
+          type="text"
+          class="field"
+          id="address"
+          name="address"
+          #address="ngModel"
+          [(ngModel)]="model.address"
+          required
+        />
+        <div *ngIf="address.invalid && (address.dirty || address.touched)">
+          <div *ngIf="address.errors?.['required']" class="field-error">
+            Địa chỉ bắt buộc nhập
+          </div>
+        </div>
+      </div>
+
+      <div class="form-field full">
+        <div class="warehouse-author-list">
+          <p class="warehouse-author-list-title">Danh sách chủ kho</p>
+          <table class="warehouse-author-list-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Họ tên</th>
+                <th>Phòng ban</th>
+                <th>Chức vụ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td></td>
+                <td><input value="Thiên Đình Võ (Gmail)" /></td>
+                <td>
+                  <input value="test" />
+                </td>
+                <td><input value="Trưởng phòng" /></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div mat-dialog-actions>
+      <button mat-button (click)="onCloseModal()">Hủy</button>
+      <button
+        mat-raised-button
+        color="primary"
+        cdkFocusInitial
+        [disabled]="!addForm.form.valid"
+      >
+        Lưu
+      </button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,58 @@
+<div class="home-container wrapper">
+  <div class="header-content">
+    <div class="header-content-title">Danh sách kho hàng</div>
+    <div class="header-content-actions">
+      <button mat-raised-button color="primary" (click)="onOpenAddModal()">
+        Thêm mới
+      </button>
+    </div>
+  </div>
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="assetWarehouseList">
+      <ng-container matColumnDef="code">
+        <th mat-header-cell *matHeaderCellDef>Mã kho</th>
+        <td mat-cell *matCellDef="let element">{{ element.code }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Tên kho</th>
+        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="address">
+        <th mat-header-cell *matHeaderCellDef>Địa chỉ</th>
+        <td mat-cell *matCellDef="let element">{{ element.address }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="created_at">
+        <th mat-header-cell *matHeaderCellDef>Ngày tạo</th>
+        <td mat-cell *matCellDef="let element">{{ element.created_at }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="created_by_user">
+        <th mat-header-cell *matHeaderCellDef>Người tạo</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element?.created_by_user?.fullname }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Trạng thái</th>
+        <td mat-cell *matCellDef="let element">{{ element?.status?.name }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+
+    <mat-paginator
+      [length]="count"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="[5, 10, 15, 20]"
+      showFirstLastButtons
+      aria-label="Select page of periodic elements"
+      (page)="onPageChange($event)"
+    >
+    </mat-paginator>
+  </div>
+</div>
