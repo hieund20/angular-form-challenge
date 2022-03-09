@@ -8,10 +8,11 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 })
 export class AddModalComponent implements OnInit {
   model = {
-    code: "",
-    name: "",
-    address: ""
-  }
+    code: '',
+    name: '',
+    address: '',
+    asset_warehouse_mamagers: ['28fcfd7a-ce37-4b88-827f-08468c3b805e'],
+  };
 
   constructor(public modal: MatDialogRef<AddModalComponent>) {}
 
