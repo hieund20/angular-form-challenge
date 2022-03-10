@@ -26,7 +26,7 @@ import { MatInputModule } from '@angular/material/input';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'edit/:warehouseId', component: WarehouseEditComponent },
-  // {path: '*', component:  }
+  { path: 'info-form', component: InforFormComponent },
 ];
 
 @NgModule({

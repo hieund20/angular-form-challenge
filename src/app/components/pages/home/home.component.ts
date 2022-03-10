@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
   pageSize: number = 5;
   totalPage: number = 0;
   count: number = 0;
-  dateFormat = 'DD/MM/YYYY';
+  dateFormat: string = 'DD/MM/YYYY';
 
   constructor(
     private assetWarehouseService: AssetWarehouseService,

@@ -9,7 +9,7 @@ import { AssetWarehouseService } from 'src/app/services/asset-warehouse-services
   styleUrls: ['./warehouse-edit.component.scss'],
 })
 export class WarehouseEditComponent implements OnInit {
-  warehouseIdParam = '';
+  warehouseIdParam: string = '';
   assetStatusList = [];
   assetWarehouseModel = {
     code: '',
@@ -53,7 +53,7 @@ export class WarehouseEditComponent implements OnInit {
   }
 
   onSaveChange() {
-    console.log('Model change', this.assetWarehouseModel);
+    // console.log('Model change', this.assetWarehouseModel);
     const modelPayload = {
       code: this.assetWarehouseModel.code,
       name: this.assetWarehouseModel.name,
@@ -65,9 +65,10 @@ export class WarehouseEditComponent implements OnInit {
     this.assetWarehouseService
       .putAssetWarehouse(modelPayload, this.warehouseIdParam)
       .subscribe((res: any) => {
-        console.log('put res', res);
         if (res?.status === 'success') {
-          console.log('Put success');
+          alert('Chỉnh sửa kho thành công !');
+        } else {
+          alert('Chỉnh sửa kho không thành công !');
         }
       });
   }
@@ -75,7 +76,6 @@ export class WarehouseEditComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe((params) => {
       const warehouseId = params.get('warehouseId');
-      console.log('warehouse id', warehouseId);
       this.warehouseIdParam = warehouseId || '';
       this.fetchAssetWarehouseById(warehouseId || '');
     });
