@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { AssetWarehouseService } from 'src/app/services/asset-warehouse.service';
+import { ApplicationRef, Component, OnInit } from '@angular/core';
+import { AssetWarehouseService } from 'src/app/services/asset-warehouse-services/asset-warehouse.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AddModalComponent } from './modals/add-modal/add-modal.component';
+import { DeleteModalComponent } from './modals/delete-modal/delete-modal.component';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-home',
@@ -16,18 +18,25 @@ export class HomeComponent implements OnInit {
     'created_at',
     'created_by_user',
     'status',
+    'action',
   ];
-
   assetWarehouseList = [];
-  currentPage = 1;
-  pageSize = 5;
-  totalPage = 0;
-  count = 0;
+  currentPage: number = 1;
+  pageSize: number = 5;
+  totalPage: number = 0;
+  count: number = 0;
+  dateFormat = 'DD/MM/YYYY';
 
   constructor(
     private assetWarehouseService: AssetWarehouseService,
-    public modal: MatDialog
+    public addModal: MatDialog,
+    public deleteModal: MatDialog,
+    private appRef: ApplicationRef
   ) {}
+
+  formatDate(date: string) {
+    return moment(date).format(this.dateFormat);
+  }
 
   fetchAssetWarehouseList(currentPage?: number, pageSize?: number) {
     this.assetWarehouseService
@@ -38,7 +47,6 @@ export class HomeComponent implements OnInit {
           this.assetWarehouseList = res?.responseData?.rows;
           this.totalPage = res?.responseData?.totalPages;
           this.count = res?.responseData?.count;
-          console.log('data', this.assetWarehouseList);
         }
       });
   }
@@ -51,14 +59,21 @@ export class HomeComponent implements OnInit {
   }
 
   onOpenAddModal() {
-    const modalRef = this.modal.open(AddModalComponent, {
+    this.addModal.open(AddModalComponent, {
       width: '780px',
     });
+  }
 
-    modalRef.afterClosed().subscribe((result) => {
-      console.log('The modal was closed');
-      // this.animal = result;
+  onOpenDeleteModal(id: string) {
+    this.deleteModal.open(DeleteModalComponent, {
+      width: '500px',
+      data: { assetWarehouseId: id },
     });
+  }
+
+  reloadComponent() {
+    this.appRef.tick();
+    console.log('reload component');
   }
 
   ngOnInit(): void {

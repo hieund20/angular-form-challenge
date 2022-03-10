@@ -1,0 +1,53 @@
+.warehouse-edit-container {
+    & > .header-content {
+        margin-bottom: 16px;
+        & > .header-content-title {
+            font-size: 16px;
+            color: #373737;
+            font-weight: 500;
+        }
+    }
+
+    & > .body-content {
+        & .grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+
+            & > .form-field {
+                width: 48%;
+                margin-bottom: 25px;
+
+                & > label {
+                    display: block;
+                    margin-bottom: 10px;
+                    font-size: 14px;
+                }
+
+                & > .field {
+                    max-width: 100%;
+                    min-width: 100%;
+                    box-sizing: border-box;
+
+                    padding: 15px 20px;
+                    border: 1px solid #d8dbe0;
+                    border-radius: 5px;
+
+                    &.ng-touched.ng-invalid {
+                        border: 1px solid #c00;
+                    }
+
+                    &.error {
+                        border: 1px solid #c00;
+                    }
+                }
+
+                & .field-error {
+                    margin-top: 5px;
+                    color: #c00;
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+}

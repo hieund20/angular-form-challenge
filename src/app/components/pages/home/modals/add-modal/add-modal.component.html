@@ -1,6 +1,6 @@
 <h1 mat-dialog-title>Thêm mới</h1>
 <div mat-dialog-content>
-  <form #addForm="ngForm">
+  <form #addForm="ngForm" (ngSubmit)="onSaveModal()">
     <div class="grid">
       <div class="form-field">
         <label for="code">Mã kho</label>
@@ -58,7 +58,7 @@
 
       <div class="form-field full">
         <div class="warehouse-author-list">
-          <p class="warehouse-author-list-title">Danh sách chủ kho</p>
+          <p class="warehouse-author-list-title">Danh sách chủ kho (Chỉ xem)</p>
           <table class="warehouse-author-list-table">
             <thead>
               <tr>
@@ -71,11 +71,11 @@
             <tbody>
               <tr>
                 <td></td>
-                <td><input value="Thiên Đình Võ (Gmail)" /></td>
+                <td><input readonly value="Thiên Đình Võ (Gmail)" /></td>
                 <td>
-                  <input value="test" />
+                  <input readonly value="test" />
                 </td>
-                <td><input value="Trưởng phòng" /></td>
+                <td><input readonly value="Trưởng phòng" /></td>
               </tr>
             </tbody>
           </table>
@@ -85,7 +85,8 @@
     <div mat-dialog-actions>
       <button mat-button (click)="onCloseModal()">Hủy</button>
       <button
-        mat-raised-button
+        type="submit"
+        mat-flat-button
         color="primary"
         cdkFocusInitial
         [disabled]="!addForm.form.valid"

@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>Xóa kho hàng</h1>
+<div mat-dialog-content>
+  <p>Bạn có chắc chắn muốn xóa kho hàng này ?</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCloseModal()">Hủy</button>
+  <button
+    mat-flat-button
+    color="warn"
+    cdkFocusInitial
+    (click)="onDeleteAssetWarehouse(data.assetWarehouseId)"
+  >
+    Xóa
+  </button>
+</div>

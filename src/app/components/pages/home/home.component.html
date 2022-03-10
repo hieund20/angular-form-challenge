@@ -2,7 +2,7 @@
   <div class="header-content">
     <div class="header-content-title">Danh sách kho hàng</div>
     <div class="header-content-actions">
-      <button mat-raised-button color="primary" (click)="onOpenAddModal()">
+      <button mat-flat-button color="primary" (click)="onOpenAddModal()">
         Thêm mới
       </button>
     </div>
@@ -26,7 +26,9 @@
 
       <ng-container matColumnDef="created_at">
         <th mat-header-cell *matHeaderCellDef>Ngày tạo</th>
-        <td mat-cell *matCellDef="let element">{{ element.created_at }}</td>
+        <td mat-cell *matCellDef="let element">
+          {{ formatDate(element.created_at) }}
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="created_by_user">
@@ -41,12 +43,30 @@
         <td mat-cell *matCellDef="let element">{{ element?.status?.name }}</td>
       </ng-container>
 
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef>Thao tác</th>
+        <td mat-cell *matCellDef="let element">
+          <img
+            class="action-icon"
+            src="../../../../assets/icons/edit.svg"
+            alt="edit-icon"
+            [routerLink]="['/edit', element?.id]"
+          />
+          <img
+            class="action-icon"
+            src="../../../../assets/icons/delete.svg"
+            alt="delete-icon"
+            (click)="onOpenDeleteModal(element?.id)"
+          />
+        </td>
+      </ng-container>
+
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
 
     <mat-paginator
-      [length]="count"
+      [length]="totalPage"
       [pageSize]="pageSize"
       [pageSizeOptions]="[5, 10, 15, 20]"
       showFirstLastButtons

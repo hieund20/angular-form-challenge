@@ -1,0 +1,90 @@
+<div class="warehouse-edit-container wrapper">
+  <div class="header-content">
+    <div class="header-content-title">Chỉnh sửa kho</div>
+  </div>
+  <div class="body-content">
+    <form #editForm="ngForm" (ngSubmit)="onSaveChange()">
+      <div class="grid">
+        <div class="form-field">
+          <label for="code">Mã kho*</label>
+          <input
+            type="text"
+            class="field"
+            id="code"
+            name="code"
+            #code="ngModel"
+            [(ngModel)]="assetWarehouseModel.code"
+            required
+          />
+          <div *ngIf="code.invalid && (code.dirty || code.touched)">
+            <div *ngIf="code.errors?.['required']" class="field-error">
+              Mã kho bắt buộc nhập
+            </div>
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="name">Tên kho*</label>
+          <input
+            type="text"
+            class="field"
+            id="name"
+            name="name"
+            #name="ngModel"
+            [(ngModel)]="assetWarehouseModel.name"
+            required
+          />
+          <div *ngIf="name.invalid && (name.dirty || name.touched)">
+            <div *ngIf="name.errors?.['required']" class="field-error">
+              Tên kho bắt buộc nhập
+            </div>
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="name">Địa chỉ*</label>
+          <input
+            type="text"
+            class="field"
+            id="address"
+            name="address"
+            #address="ngModel"
+            [(ngModel)]="assetWarehouseModel.address"
+            required
+          />
+          <div *ngIf="address.invalid && (name.dirty || name.touched)">
+            <div *ngIf="address.errors?.['required']" class="field-error">
+              Địa chỉ bắt buộc nhập
+            </div>
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="status">Trạng thái*</label>
+          <select
+            class="field"
+            id="status"
+            required
+            name="status"
+            #status="ngModel"
+            [(ngModel)]="assetWarehouseModel.status.id"
+          >
+            <option
+              *ngFor="let status of assetStatusList"
+              [value]="status['id']"
+            >
+              {{ status["name"] }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <button mat-button [routerLink]="['/']">Quay về</button>
+      <button
+        type="submit"
+        mat-flat-button
+        color="primary"
+        cdkFocusInitial
+        [disabled]="!editForm.form.valid || !editForm.form.touched"
+      >
+        Lưu thay đổi
+      </button>
+    </form>
+  </div>
+</div>

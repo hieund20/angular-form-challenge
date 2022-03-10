@@ -5,8 +5,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { InforFormComponent } from './components/infor-form/infor-form.component';
 import { TopBarComponent } from './shared/layout/top-bar/top-bar.component';
-import { HomeComponent } from './components/pages/home/home/home.component';
-import { AddModalComponent } from './components/pages/home/home/modals/add-modal/add-modal.component';
+import { HomeComponent } from './components/pages/home/home.component';
+import { AddModalComponent } from './components/pages/home/modals/add-modal/add-modal.component';
+import { DeleteModalComponent } from './components/pages/home/modals/delete-modal/delete-modal.component';
+import { WarehouseEditComponent } from './components/pages/warehouse-edit/warehouse-edit.component';
 
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -23,7 +25,7 @@ import { MatInputModule } from '@angular/material/input';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'create', component: InforFormComponent },
+  { path: 'edit/:warehouseId', component: WarehouseEditComponent },
   // {path: '*', component:  }
 ];
 
@@ -34,6 +36,8 @@ const routes: Routes = [
     TopBarComponent,
     HomeComponent,
     AddModalComponent,
+    DeleteModalComponent,
+    WarehouseEditComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),
@@ -50,7 +54,7 @@ const routes: Routes = [
     MatFormFieldModule,
     MatInputModule,
   ],
-  providers: [],
+  providers: [HomeComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
