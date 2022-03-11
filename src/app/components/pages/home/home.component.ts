@@ -1,9 +1,11 @@
-import { ApplicationRef, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRouteSnapshot } from '@angular/router';
+import * as moment from 'moment';
 import { AssetWarehouseService } from 'src/app/services/asset-warehouse-services/asset-warehouse.service';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AddModalComponent } from './modals/add-modal/add-modal.component';
 import { DeleteModalComponent } from './modals/delete-modal/delete-modal.component';
-import * as moment from 'moment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -31,7 +33,7 @@ export class HomeComponent implements OnInit {
     private assetWarehouseService: AssetWarehouseService,
     public addModal: MatDialog,
     public deleteModal: MatDialog,
-    private appRef: ApplicationRef
+    private router: Router
   ) {}
 
   formatDate(date: string) {
@@ -47,6 +49,7 @@ export class HomeComponent implements OnInit {
           this.assetWarehouseList = res?.responseData?.rows;
           this.totalPage = res?.responseData?.totalPages;
           this.count = res?.responseData?.count;
+          console.log('data', this.assetWarehouseList);
         }
       });
   }
@@ -69,11 +72,6 @@ export class HomeComponent implements OnInit {
       width: '500px',
       data: { assetWarehouseId: id },
     });
-  }
-
-  reloadComponent() {
-    this.appRef.tick();
-    console.log('reload component');
   }
 
   ngOnInit(): void {

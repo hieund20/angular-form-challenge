@@ -27,9 +27,8 @@ export class DeleteModalComponent implements OnInit {
         console.log('res', res);
         if (res?.status === 'success') {
           alert('Xóa kho hàng thành công !');
-          this.homeComponent.fetchAssetWarehouseList(1, 5);
           this.onCloseModal();
-          window.location.reload();
+          this.homeComponent.fetchAssetWarehouseList(1, 5);
         } else {
           alert(
             'Kho hàng đang chứa tài sản, không thể xóa. Vui lòng xóa kho hàng khác !'

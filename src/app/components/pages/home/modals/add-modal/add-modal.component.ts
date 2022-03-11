@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 import { AssetWarehouseService } from 'src/app/services/asset-warehouse-services/asset-warehouse.service';
 import { HomeComponent } from '../../home.component';
 
@@ -19,7 +19,7 @@ export class AddModalComponent implements OnInit {
   constructor(
     public modal: MatDialogRef<AddModalComponent>,
     private assetWarehouseService: AssetWarehouseService,
-    private homeComponent: HomeComponent
+    public homeComponent: HomeComponent
   ) {}
 
   onCloseModal() {
@@ -34,9 +34,8 @@ export class AddModalComponent implements OnInit {
         console.log('res', res);
         if (res?.status === 'success') {
           alert('Thêm mới kho thành công !');
-          this.homeComponent.fetchAssetWarehouseList(1, 5);
           this.onCloseModal();
-          window.location.reload();
+          this.homeComponent.fetchAssetWarehouseList(1, 5);
         } else {
           alert('Thêm mới kho không thành công !');
         }
