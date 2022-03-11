@@ -54,7 +54,7 @@ const routes: Routes = [
     MatFormFieldModule,
     MatInputModule,
   ],
-  providers: [HomeComponent],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

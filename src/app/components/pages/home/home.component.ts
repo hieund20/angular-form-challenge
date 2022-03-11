@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRouteSnapshot } from '@angular/router';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import * as moment from 'moment';
 import { AssetWarehouseService } from 'src/app/services/asset-warehouse-services/asset-warehouse.service';
 import { AddModalComponent } from './modals/add-modal/add-modal.component';
 import { DeleteModalComponent } from './modals/delete-modal/delete-modal.component';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -32,8 +30,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private assetWarehouseService: AssetWarehouseService,
     public addModal: MatDialog,
-    public deleteModal: MatDialog,
-    private router: Router
+    public deleteModal: MatDialog
   ) {}
 
   formatDate(date: string) {
@@ -45,11 +42,9 @@ export class HomeComponent implements OnInit {
       .getAllAssetWarehouse(currentPage, pageSize)
       .subscribe((res: any) => {
         if (res?.status === 'success') {
-          console.log(res);
           this.assetWarehouseList = res?.responseData?.rows;
           this.totalPage = res?.responseData?.totalPages;
           this.count = res?.responseData?.count;
-          console.log('data', this.assetWarehouseList);
         }
       });
   }
@@ -62,15 +57,25 @@ export class HomeComponent implements OnInit {
   }
 
   onOpenAddModal() {
-    this.addModal.open(AddModalComponent, {
+    const dialogRef = this.addModal.open(AddModalComponent, {
       width: '780px',
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === 'add-success') {
+        this.fetchAssetWarehouseList(this.currentPage, this.pageSize);
+      }
     });
   }
 
   onOpenDeleteModal(id: string) {
-    this.deleteModal.open(DeleteModalComponent, {
+    const dialogRef = this.deleteModal.open(DeleteModalComponent, {
       width: '500px',
       data: { assetWarehouseId: id },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === 'delete-success') {
+        this.fetchAssetWarehouseList(this.currentPage, this.pageSize);
+      }
     });
   }
 

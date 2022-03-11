@@ -19,23 +19,20 @@ export class AddModalComponent implements OnInit {
   constructor(
     public modal: MatDialogRef<AddModalComponent>,
     private assetWarehouseService: AssetWarehouseService,
-    public homeComponent: HomeComponent
   ) {}
 
-  onCloseModal() {
-    this.modal.close();
+  onCloseModal(onSave: string) {
+    this.modal.close(onSave);
   }
 
   onSaveModal() {
-    console.log('Save', this.model);
     this.assetWarehouseService
       .postNewAssetWarehouse(this.model)
       .subscribe((res: any) => {
-        console.log('res', res);
+        // console.log('res', res);
         if (res?.status === 'success') {
           alert('Thêm mới kho thành công !');
-          this.onCloseModal();
-          this.homeComponent.fetchAssetWarehouseList(1, 5);
+          this.onCloseModal('add-success');
         } else {
           alert('Thêm mới kho không thành công !');
         }

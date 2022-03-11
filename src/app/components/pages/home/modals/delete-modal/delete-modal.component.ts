@@ -12,23 +12,21 @@ export class DeleteModalComponent implements OnInit {
   constructor(
     private assetWarehouseService: AssetWarehouseService,
     public modal: MatDialogRef<DeleteModalComponent>,
-    private homeComponent: HomeComponent,
     @Inject(MAT_DIALOG_DATA) public data: { assetWarehouseId: '' }
   ) {}
 
-  onCloseModal() {
-    this.modal.close();
+  onCloseModal(onDelete: string) {
+    this.modal.close(onDelete);
   }
 
   onDeleteAssetWarehouse(id: string) {
     this.assetWarehouseService
       .deleteAssetWarehouse(id)
       .subscribe((res: any) => {
-        console.log('res', res);
+        // console.log('res', res);
         if (res?.status === 'success') {
           alert('Xóa kho hàng thành công !');
-          this.onCloseModal();
-          this.homeComponent.fetchAssetWarehouseList(1, 5);
+          this.onCloseModal('delete-success');
         } else {
           alert(
             'Kho hàng đang chứa tài sản, không thể xóa. Vui lòng xóa kho hàng khác !'
