@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { AssetWarehouseService } from 'src/app/services/asset-warehouse-services/asset-warehouse.service';
-import { HomeComponent } from '../../home.component';
 
 @Component({
   selector: 'app-add-modal',
@@ -29,7 +28,6 @@ export class AddModalComponent implements OnInit {
     this.assetWarehouseService
       .postNewAssetWarehouse(this.model)
       .subscribe((res: any) => {
-        // console.log('res', res);
         if (res?.status === 'success') {
           alert('Thêm mới kho thành công !');
           this.onCloseModal('add-success');

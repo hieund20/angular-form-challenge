@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import * as moment from 'moment';
 import { AssetWarehouseService } from 'src/app/services/asset-warehouse-services/asset-warehouse.service';
 import { AddModalComponent } from './modals/add-modal/add-modal.component';
@@ -23,7 +23,6 @@ export class HomeComponent implements OnInit {
   assetWarehouseList = [];
   currentPage: number = 1;
   pageSize: number = 5;
-  totalPage: number = 0;
   count: number = 0;
   dateFormat: string = 'DD/MM/YYYY';
 
@@ -43,14 +42,12 @@ export class HomeComponent implements OnInit {
       .subscribe((res: any) => {
         if (res?.status === 'success') {
           this.assetWarehouseList = res?.responseData?.rows;
-          this.totalPage = res?.responseData?.totalPages;
           this.count = res?.responseData?.count;
         }
       });
   }
 
   onPageChange(e: any) {
-    console.log('current page', e);
     this.currentPage = e.pageIndex + 1;
     this.pageSize = e.pageSize;
     this.fetchAssetWarehouseList(this.currentPage, this.pageSize);

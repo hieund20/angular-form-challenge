@@ -22,11 +22,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { NotFoundComponent } from './components/pages/not-found/not-found.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'edit/:warehouseId', component: WarehouseEditComponent },
   { path: 'info-form', component: InforFormComponent },
+  { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({
@@ -38,6 +40,7 @@ const routes: Routes = [
     AddModalComponent,
     DeleteModalComponent,
     WarehouseEditComponent,
+    NotFoundComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),

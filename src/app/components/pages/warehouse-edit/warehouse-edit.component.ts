@@ -53,7 +53,6 @@ export class WarehouseEditComponent implements OnInit {
   }
 
   onSaveChange() {
-    // console.log('Model change', this.assetWarehouseModel);
     const modelPayload = {
       code: this.assetWarehouseModel.code,
       name: this.assetWarehouseModel.name,

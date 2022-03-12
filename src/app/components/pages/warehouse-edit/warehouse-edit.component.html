@@ -22,6 +22,7 @@
             </div>
           </div>
         </div>
+
         <div class="form-field">
           <label for="name">Tên kho*</label>
           <input
@@ -39,6 +40,7 @@
             </div>
           </div>
         </div>
+
         <div class="form-field">
           <label for="name">Địa chỉ*</label>
           <input
@@ -56,6 +58,7 @@
             </div>
           </div>
         </div>
+
         <div class="form-field">
           <label for="status">Trạng thái*</label>
           <select
@@ -73,6 +76,34 @@
               {{ status["name"] }}
             </option>
           </select>
+        </div>
+
+        <div class="form-field full">
+          <div class="warehouse-author-list">
+            <p class="warehouse-author-list-title">
+              Danh sách chủ kho (Chỉ xem)
+            </p>
+            <table class="warehouse-author-list-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Họ tên</th>
+                  <th>Phòng ban</th>
+                  <th>Chức vụ</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td><input readonly value="Thiên Đình Võ (Gmail)" /></td>
+                  <td>
+                    <input readonly value="test" />
+                  </td>
+                  <td><input readonly value="Trưởng phòng" /></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
       <button mat-button [routerLink]="['/']">Quay về</button>

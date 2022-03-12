@@ -1,7 +1,6 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AssetWarehouseService } from 'src/app/services/asset-warehouse-services/asset-warehouse.service';
-import { HomeComponent } from '../../home.component';
 
 @Component({
   selector: 'app-delete-modal',
@@ -23,7 +22,6 @@ export class DeleteModalComponent implements OnInit {
     this.assetWarehouseService
       .deleteAssetWarehouse(id)
       .subscribe((res: any) => {
-        // console.log('res', res);
         if (res?.status === 'success') {
           alert('Xóa kho hàng thành công !');
           this.onCloseModal('delete-success');
