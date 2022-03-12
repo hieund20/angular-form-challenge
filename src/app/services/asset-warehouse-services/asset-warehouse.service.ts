@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { VODINHTHIEN_BEARER_KEY } from '../constants/constants';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AssetWarehouseService {
-  bearer =
-    'eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoidm9kaW5odGhpZW5AZ21haWwuY29tIiwiZXhwIjoxNjUxMTk4ODMxLCJpc3MiOiJhbmF3b3JrLmNvbSIsImF1ZCI6ImFuYXdvcmsuY29tIn0.v8HBOAYCk9-FEA2V6oiXZMBY-kISDwZhnhElXx1c_HY';
+  bearer = VODINHTHIEN_BEARER_KEY;
 
   constructor(private http: HttpClient) {}
 
